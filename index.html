@@ -1,88 +1,26 @@
+<!doctype HTML>
 <html>
-  <head>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-  <script type="text/javascript" src="./sim.js"></script>
-  <script type="text/javascript" src="./index.js"></script>
-  <link rel="stylesheet" href="index.css" type="text/css" />
-  <title>Sim Js - Intersection</title>
-  <link rel="icon" href="./intersection.png">
+<script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js">
+</script>
+<link rel="stylesheet" href="main.css">
 
-  <script type="text/javascript">
-  $(function () {
-    $("#run_simulation").click(function () {
+<body style='margin : 0px; overflow: hidden;'>
 
-      var green_time = parseFloat($('[name="GREEN_TIME"]').val());
-      var mean_arrival = parseFloat($('[name="MEAN_ARRIVAL"]').val());
-      var seed = parseFloat($('[name="SEED"]').val());
-      var simtime = parseFloat($('[name="SIMTIME"]').val());
+    <a-scene embedded arjs>
+        <a-marker preset="hiro">
+            <a-entity id="model" collada-model=”url(./08/model.dae)”>
+            </a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
 
-      var results = trafficLightSimulation(green_time, mean_arrival, seed, simtime);
-      var msg = "<div class=\"result\">Результаты симуляции для значений: ["
-                + "Врмея зеленого сигнала = " + green_time
-                + ", Интервал машин = " + mean_arrival
-                + ", \"соль\" = " + seed
-                + ", Время симуляции = " + simtime
-                + "]<br>"
-                + "Среднее значения ожидания на перекрестке (min) = "
-                + results[0].toFixed(4)
-                + "<br>Среднее количество машин  в заторе = "
-                + results[2].toFixed(4) + "</div>";
-      $(".results").append(msg);
-    });
-
-    $("#clear_result").click(function () {
-      $(".results").html('<a href="" id="clear_results">Clear</a><hr>');
-    });
-    $("#try").click(function () {
-      document.getElementsByClassName('simulation')[0].scrollIntoView({behavior: "smooth"});
-    });
-
-  });
-  </script>
-
-  </head>
-  <body>
-    <div class="intro">
-        <div class="intro-title">
-            Симуляция перекрестка
-        </div>
-        <!-- <img src="./intersection.png" alt="png"> -->
-        <div class="intro-description">
-            Данная симуляция реализована на библиотеке Sim.js.
-            Смоделирован перекресток с направлениями запад-восток, восток-запад, юг-север, север-юг.
-        </div>
-        <button id="try" class="button-primary">
-            Попробовать
-        </button>
-    </div>
-    <div class="simulation">
-        <div class="form">
-            <div class="form-title">
-                Введите данные для симуляции
-            </div>
-            <div class="form-line">
-                <div class="form-line-text">Длительность зеленого сигнала светофора (в минутах)</div>
-                <input class="form-line-input" type="text" name="GREEN_TIME" value="3.0"/>
-            </div>
-            <div class="form-line">
-                <div class="form-line-text">Средний интервал между подъезжающими машинами (в минутах)</div>
-                <input class="form-line-input" type="text" name="MEAN_ARRIVAL" value="0.5"/>
-            </div>
-            <div class="form-line">
-                <div class="form-line-text">"Соль" для генератора рандома</div>
-                <input class="form-line-input" type="text" name="SEED" value="1234" />
-            </div>
-            <div class="form-line">
-                <div class="form-line-text">Длительность Симуляции (в минутах)</div>
-                <input class="form-line-input" type="text" name="SIMTIME" value="240"/>
-            </div>
-
-            <input type="button" value="Старт" id="run_simulation" class="button-primary"/>
-            <a href="" id="clear_results" class="button-secondary">Очистить</a>
-            <div class="results"></div>
+    <div class="video_overlays">
+        <div id="slider" class="slider">
+            <div class="thumb"></div>
         </div>
     </div>
-  </body>
+    <script src="slider.js"></script>
+</body>
+
 </html>
-
-
