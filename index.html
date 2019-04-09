@@ -18,10 +18,10 @@
     </a-scene>
 
     <div class="video_overlays">
-        <div id="slider" class="slider">
-            <div class="thumb"></div>
+        <div class="slider-wrapper">
+            <input id="slider" type="range" min="0.125" max="8" step="0.125" value="1" oninput="onSliderValueChange(this.value);">  <!--ranged skider -->
         </div>
-    </div> -->
+    </div>
     <script src="slider.js"></script>
 </body>
 
